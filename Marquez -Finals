@@ -1,0 +1,236 @@
+# Finals-Marquez-BSIT-2-1
+VapeShop
+
+
+using System;
+using System.Collections.Generic;
+
+namespace Marquez
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            List<string> menu = new List<string>
+            {
+                "======================",
+				"Free Based Vape Juice:",
+                "I Clouds Halo-Halo 3mg",
+				"Pastry Vapors Twinkies 3mg",
+				"Pastry Vapors Ube Lecheflan 9-12mg",
+				"Pastry Vapors Creme Brulee 9-12mg",
+				"Power LineUp CheeseCake 9-12mg",
+                "Bliss Ry4 Nutty 9mg",
+                "Bliss Xtremely Nutty Ry4 9mg",
+				"StarBacks Double ChocoChips 9-12mg",
+				"StarBacks Caramel Macchiato 9-12mg",
+                "StarBacks Strawberry Creme Frappe 9-12mg",
+                "Parallel Breakfast Cereal 12mg",
+                "Parallel Nougat 12mg",
+                "Drip Ry4 Cupcake 6mg",
+				"Flava Jr Grape Yakult 6mg",
+				"Flava Jr Banana Peanut Butter 6mg",
+				"Demon Vape RTO 0mg",
+				"Demon Vape Lola Cola 0mg",
+				"Kupipko Black 12mg",
+				"Kupiko Brown 12mg",
+				"Kupiko Cappuccino 12mg",
+				"======================",
+				"Salt Nicotine Vape Juice",
+				"Flava Almond Hazlenut 50mg",
+				"Nerdz 50mg",
+				"The Creations Cubano 24mg",
+				"Honey Butter 24mg",
+				"Pastry Vapors Twinkies 50mg",
+				"Pastry Vapors Ube Lecheflan 50mg",
+				"Pastry Vapors Creme Brulee 50mg",
+				"Power LineUp Cheesecake 50mg",
+				"======================",
+				"Relx Juice Pods",
+				"White Freeze",
+				"Gardens Heart",
+				"Rich Tobacco",
+				"Dark Sparkle",
+				"Fresh Red",
+				"Golden Slice",
+				"Mellow Melody",
+				"Menthol Xtra",
+				"======================",
+				"Disposable Vapes",
+				"Demon Vape Acid Dark 5%",
+				"Demon Vape Strawberry Ice Cream 5%",
+				"White Nectar 5%",
+				"Gummy Bears 5%",
+				"Lush Ice 5%",
+				"Red Slush 5%",
+				"Mercedes 5%",
+            };
+
+            List<int> prices = new List<int>
+            {
+                150-300,
+                0,
+				300,
+				250,
+                250,
+				250,
+				200,
+				250,
+				130,
+                130,
+                150,
+				150,
+				150,
+                150,
+                300,
+                300,
+                150,
+				150,
+				150,
+				250,
+				250,
+				150,
+				0,
+				300,
+				300,
+				300,
+				300,
+				300,
+				300,
+				300,
+				300,
+				300,
+				0,
+				230,
+				230,
+				230,
+				230,
+				230,
+				230,
+				230,
+				230,
+				230,
+				0,
+				400,
+				400,
+				400,
+				400,
+				400,
+				400,
+				400,
+				400,
+				400,
+            };
+
+            List<string> orderList = new List<string>();
+            int totalCost = 0;
+
+            while (true)
+            {
+                ShowMainMenu();
+                string userInput = GetUserInput();
+
+                switch (userInput)
+                {
+                    case "a":
+                    case "A":
+                        for (int i = 0; i < menu.Count; i++)
+                        {
+                            Console.WriteLine($"{menu[i]} = {prices[i]}");
+                        }
+                        Console.WriteLine("");
+                        break;
+
+                    case "b":
+                    case "B":
+                        Console.WriteLine("Enter Vape Juice you want!:");
+                        string order = Console.ReadLine();
+                        if (menu.Contains(order))
+                        {
+                            Console.WriteLine("Vape Juice Added Successfully");
+                            orderList.Add(order);
+                            totalCost += prices[menu.IndexOf(order)];
+                        }
+                        else
+                        {
+                            Console.WriteLine("Sorry the Juice You've chosen is not available");
+                        }
+                        Console.WriteLine("");
+                        break;
+
+                    case "c":
+                    case "C":
+                        Console.WriteLine("Enter Vape Juice you want to remove from the List:");
+                        string removeOrder = Console.ReadLine();
+                        if (orderList.Contains(removeOrder))
+                        {
+                            Console.WriteLine("Successfully removed Juice");
+                            orderList.Remove(removeOrder);
+                            totalCost -= prices[menu.IndexOf(removeOrder)];
+                        }
+                        else
+                        {
+                            Console.WriteLine("Sorry The Juice You've chosen is not available");
+                        }
+						 Console.WriteLine("");
+                        break;
+
+                    case "d":
+                    case "D":
+                        Console.WriteLine("Here are The Vape Juice you've Selected");
+                        foreach (string orderItem in orderList)
+                        {
+                            Console.WriteLine($"{orderItem} = {prices[menu.IndexOf(orderItem)]}");
+                        }
+                        Console.WriteLine("Total cost: {totalCost}");
+                        Console.WriteLine("");
+                        break;
+                    
+                    case "e":
+                    case "E":
+                    Console.WriteLine("");
+                    Console.WriteLine("For Gcash Payment:");
+                    Console.WriteLine("Enter Mobile Number:");
+                    Console.WriteLine("Scan Qr Code We Provided");
+                    break;
+                    
+                    case "f":
+                    case "F":
+                    Console.WriteLine("");
+                    Console.WriteLine("For Cash Payment:");
+                    Console.WriteLine("Please Proceed In the Main Counter");
+                    break;
+                    
+
+                    case "x":
+                    case "X":
+                        Console.WriteLine("");
+                        Console.WriteLine("Thankyou For Trusting SecretShop Vape Lounge");
+                        Console.WriteLine($"Your total cost is: {totalCost}");
+                        Console.WriteLine("Please Proceed to the Vapeshop Owner for Payment, Thankyou!.");
+                        return;
+                }
+            }
+        }
+
+        static void ShowMainMenu()
+        {
+
+            Console.WriteLine("a to view available Vape Juice");
+            Console.WriteLine("b to Choose Vape Juice");
+            Console.WriteLine("c to Remove Vape Juice");
+            Console.WriteLine("d to view the Juice you've chosen and the Price");
+            Console.WriteLine("e For Gcash Paymemnt");
+            Console.WriteLine("f For Cash Payment");
+            Console.WriteLine("x to exit");
+            Console.WriteLine("");
+        }
+
+        static string GetUserInput()
+        {
+            Console.WriteLine("Select From Each Letters");
+            string input = Console.ReadLine();
+            return input;
+        }
+    }
+}
